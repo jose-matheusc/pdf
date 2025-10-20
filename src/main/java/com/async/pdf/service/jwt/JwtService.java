@@ -25,7 +25,7 @@ public class JwtService {
     }
 
     /**
-     * Cria um JWT a partir do username e roles
+     * Creates a JWT from username and roles
      */
     public String generateToken(TokenPresenterDto tokenPresenterDto) {
         return Jwts.builder()
@@ -38,7 +38,7 @@ public class JwtService {
     }
 
     /**
-     * Valida o token
+     * Validates the token
      */
     public boolean validateToken(String token) {
         try {
@@ -53,14 +53,14 @@ public class JwtService {
     }
 
     /**
-     * Retorna o username do token
+     * Returns the username from the token
      */
     public String extractUsername(String token) {
         return parseClaims(token).getSubject();
     }
 
     /**
-     * Retorna roles do token
+     * Returns roles from the token
      */
     public List<String> extractRoles(String token) {
         Claims claims = parseClaims(token);
@@ -68,7 +68,7 @@ public class JwtService {
     }
 
     /**
-     * Parse Claims do token
+     * Parses Claims from the token
      */
     private Claims parseClaims(String token) {
         return Jwts.parserBuilder()

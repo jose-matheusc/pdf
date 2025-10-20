@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/pedidos")
-public class PedidoController {
+@RequestMapping("/orders")
+public class OrderController {
 
     private final PedidoProducer pedidoProducer;
 
-    public PedidoController(PedidoProducer pedidoProducer) {
+    public OrderController(PedidoProducer pedidoProducer) {
         this.pedidoProducer = pedidoProducer;
     }
 
-    @PostMapping("/public/enviar")
-    public ResponseEntity<String> enviarPedido() {
+    @PostMapping("/public/send")
+    public ResponseEntity<String> sendOrder() {
         pedidoProducer.enviarPedido();
-        return ResponseEntity.ok("Pedido enviado com sucesso!");
+        return ResponseEntity.ok("Order sent successfully!");
     }
 }
