@@ -1,0 +1,9 @@
+spring:
+  rabbitmq:
+    host: {DB_HOST_RABBITMQ}
+    port: {DB_PORT_RABBITMQ}
+    username: {DB_USER_RABBITMQ}
+    password: {DB_PASS_RABBITMQ}
+jwt:
+  secret: {JWT_SECRET}
+  expiration-ms: {JWT_EXPIRATION_MS}
