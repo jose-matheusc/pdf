@@ -1,20 +1,22 @@
-package com.async.pdf.config.filter;
+package com.async.pdf.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
-@Component
+@Configuration
 public class SecurityConfig {
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        http.csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/public/**").permitAll()
-                        .anyExchange().authenticated()
-                );
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable()) // Desativa proteção CSRF (útil para APIs)
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // Libera tudo
+                )
+                .headers(headers -> headers.frameOptions(frame -> frame.disable())); // Permite acesso a H2 e etc
+
         return http.build();
     }
 }
