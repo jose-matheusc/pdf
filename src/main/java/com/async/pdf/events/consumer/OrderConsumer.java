@@ -31,7 +31,7 @@ public class OrderConsumer {
      */
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public void processOrder(String message) throws IOException {
-        String response = ollamaService.chat(message + "em ptbr e com imagem png");
+        String response = ollamaService.chat("me faça um resumo do" + message + "em ptbr e com reposta direta. Sem rodeios.");
 
         String path = pdfStoragePath + System.currentTimeMillis() + ".pdf";
         new File(path).getParentFile().mkdirs();
