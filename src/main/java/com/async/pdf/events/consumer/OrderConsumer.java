@@ -31,12 +31,19 @@ public class OrderConsumer {
      */
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public void processOrder(String message) throws IOException {
-        String response = ollamaService.chat("Make me a one-page summary of the important points of the"
-                + message + "in PTBR and with direct response. Bluntly.");
+        String response = """
+        Generate a complete, detailed, objective, and well-structured text in Brazilian Portuguese about the topic: %s.
+        Avoid introductions such as "let's analyze", "as we will see next", or any generic opening phrases.
+        The text must fit approximately one PDF page while maintaining depth and clarity.
+        Cover: overview, practical applications, relevant technical aspects, benefits, and use cases.
+        Do not oversummarize, but do not make the text excessively long.
+        The final response must be entirely written in Portuguese (Brazil).
+    """.formatted(message);
+
 
         String path = pdfStoragePath + System.currentTimeMillis() + ".pdf";
         new File(path).getParentFile().mkdirs();
 
-        pdfService.createPdf(response, path);
+        pdfService.createPdf(ollamaService.chat((response)), path);
     }
 }

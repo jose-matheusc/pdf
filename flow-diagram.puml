@@ -1,0 +1,58 @@
+@startuml
+!theme spacelab
+
+' ---- Global Style ----
+skinparam Shadowing true
+skinparam ArrowColor #2471A3
+skinparam ArrowThickness 2
+skinparam ArrowFontColor #1B2631
+
+skinparam RectangleBorderColor #1B2631
+skinparam RectangleFontColor #1B2631
+skinparam RectangleFontSize 15
+skinparam RectangleRoundCorner 18
+skinparam DefaultTextAlignment center
+
+skinparam ActivityBorderColor #1B2631
+skinparam ActivityBackgroundColor #EBF5FB
+skinparam ActivityFontColor #1B2631
+skinparam ActivityFontSize 15
+skinparam ActivityRoundCorner 18
+
+' ---- Icons ----
+!define ICON_USER <&user>
+!define ICON_SERVER <&server>
+!define ICON_AI <&bolt>
+!define ICON_DOC <&file-text>
+!define ICON_QUEUE <&bars>
+!define ICON_SEND <&share>
+!define ICON_CHECK <&check>
+
+title <b><size:24>📄 PDF Async Service – Full Asynchronous Flow</size></b>
+caption <i>Smooth and elegant flow of PDF generation using RabbitMQ + Local AI</i>
+
+|User|
+start
+:ICON_SEND\n<b>Send POST</b>\n/public/pdf/generate\n(JSON payload);
+
+|API (Spring Boot)|
+:ICON_CHECK\n<b>Receive request</b>;
+:ICON_CHECK\nValidate & map data;
+
+|Message Producer|
+:ICON_SEND\n<b>Publish message</b>\nto RabbitMQ;
+
+|RabbitMQ Queue|
+:ICON_QUEUE\n<b>Queue message</b>\nDeliver to consumer;
+
+|Message Consumer|
+:ICON_SERVER\n<b>Consume message</b>;
+
+|Local LLM (Ollama)|
+:ICON_AI\n<b>Generate enriched text</b>;
+
+|PDF Generator (PDFBox)|
+:ICON_DOC\n<b>Create final PDF</b>;
+
+stop
+@enduml
