@@ -1,4 +1,11 @@
 spring:
+  autoconfigure:
+    exclude: org.springframework.cloud.gateway.config.GrpcAutoConfiguration
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: gemma3:1b
   rabbitmq:
     host: {DB_HOST_RABBITMQ}
     port: {DB_PORT_RABBITMQ}

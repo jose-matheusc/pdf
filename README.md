@@ -1,55 +1,55 @@
 # PDF Async Service
 
-Este projeto é uma aplicação Spring Boot para processamento assíncrono de PDFs e gestão de pedidos, usando RabbitMQ para mensageria, JWT para autenticação e Ollama para processamento de IA.
+This project is a Spring Boot application for asynchronous PDF processing and order management, using RabbitMQ for messaging, JWT for authentication, and Ollama for AI processing.
 
-## Instalação do Ollama e do modelo gemma3:1b
-Ollama é necessário para funcionalidades de IA. Instale antes de rodar a aplicação:
+## Installing Ollama and the gemma3:1b model
+Ollama is required for AI features. Install it before running the application:
 
-- Baixe e instale Ollama para Windows: [https://ollama.com/download](https://ollama.com/download)
-- Após instalar, baixe o modelo obrigatório gemma3:1b:
+- Download and install Ollama for Windows: [https://ollama.com/download](https://ollama.com/download)
+- After installing, download the required gemma3:1b model:
   ```
   ollama pull gemma3:1b
   ```
-- Para rodar o modelo:
+- To run the model:
   ```
   ollama run gemma3:1b
   ```
-- Para verificar se o modelo está disponível:
+- To check if the model is available:
   ```
   ollama list
   ```
-- Ollama e o modelo gemma3:1b devem estar ativos antes de iniciar o serviço PDF.
+- Ollama and the gemma3:1b model must be running before starting the PDF service.
 
-## PDF Gerado
-O serviço gera relatórios em PDF com design moderno:
-- **Cabeçalho azul** com título "Relatório Inteligente" e subtítulo.
-- **Card cinza expandido** ocupando toda a área útil da página, com barra lateral azul à esquerda.
-- **Suporte a Markdown básico**: títulos (##), negrito (**texto**), listas (- ou *), parágrafos e espaçamento automático.
-- O título "Resposta da Inteligência Artificial" foi removido do corpo do PDF.
-- O conteúdo do relatório pode ser personalizado via API, aceitando texto com formatação simples.
+## Generated PDF
+The service generates PDF reports with a modern design:
+- **Blue header** with the title "Relatório Inteligente" and subtitle.
+- **Expanded gray card** filling the usable page area, with a blue accent bar on the left.
+- **Basic Markdown support**: headings (##), bold (**text**), lists (- or *), paragraphs, and automatic spacing.
+- The "Resposta da Inteligência Artificial" title has been removed from the PDF body.
+- The report content can be customized via API, accepting simple formatted text.
 
-### Exemplo visual
+### Visual Example
 ```
 ┌─────────────────────────────────────────────┐
 │ Relatório Inteligente                      │
-│ Gerado automaticamente pelo sistema        │
+│ Generated automatically by the system      │
 ├─────────────────────────────────────────────┤
 │ ▌                                         │
-│ ▌  [Conteúdo formatado, com títulos,       │
-│ ▌   listas, negrito, etc.]                 │
+│ ▌  [Formatted content: headings,           │
+│ ▌   lists, bold, etc.]                     │
 │ ▌                                         │
 └─────────────────────────────────────────────┘
 ```
 
-### Personalização
-Envie o texto do relatório via API, usando Markdown simples para destacar títulos, listas e negrito. O serviço cuida da quebra de página e do layout automaticamente.
+### Customization
+Send the report text via API, using simple Markdown to highlight headings, lists, and bold. The service automatically handles page breaks and layout.
 
 ## Features
-- Processamento assíncrono de pedidos via RabbitMQ
-- Geração e manipulação de PDFs com layout moderno
-- Autenticação e autorização via JWT
-- Integração com Ollama para IA
-- Endpoints RESTful
+- Asynchronous order processing via RabbitMQ
+- PDF generation and manipulation with modern layout
+- Authentication and authorization via JWT
+- Integration with Ollama for AI
+- RESTful endpoints
 
 ## Technologies
 - Java 17+
@@ -61,49 +61,46 @@ Envie o texto do relatório via API, usando Markdown simples para destacar títu
 
 ## Getting Started
 
-### Pré-requisitos
-- Java 17 ou superior
+### Prerequisites
+- Java 17 or higher
 - Maven
-- Docker (para RabbitMQ)
-- Ollama instalado e rodando com o modelo gemma3:1b
+- Docker (for RabbitMQ)
+- Ollama installed and running with the gemma3:1b model
 
 ### Setup
-1. Clone o repositório:
+1. Clone the repository:
    ```
    git clone https://github.com/jose-matheusc/pdf
    ```
-2. Inicie o RabbitMQ usando Docker Compose:
+2. Start RabbitMQ using Docker Compose:
    ```
    docker-compose up -d
    ```
-3. Compile o projeto:
+3. Build the project:
    ```
    mvn clean install
    ```
-4. Execute a aplicação:
+4. Run the application:
    ```
    mvn spring-boot:run
    ```
 
 ## API Endpoints
 
-### Pedido
-- `POST /orders/public/send` - Envia um novo pedido para processamento
+### PDF Generation
+- `POST /public/pdf/generate` - Send content to generate a custom PDF
 
-### Autenticação
-- Endpoints JWT para geração e validação de token (veja JwtController)
+### Authentication
+- JWT endpoints for token generation and validation (see JwtController) - not required for basic usage
 
-## Configuração
-As configurações estão em `src/main/resources/application.yml` e `application-local.yml`.
+## Configuration
+Settings are in `src/main/resources/application.yml` and `application-local.yml`.
 
-## Testes
-Execute os testes com:
+## Tests
+Run tests with:
 ```
 mvn test
 ```
 
-## Licença
-Este projeto está sob a licença MIT.
-
-## Contato
-Dúvidas ou suporte: <your-email>
+## Contact
+Questions or support: josematheus.profissional@gmail.com
