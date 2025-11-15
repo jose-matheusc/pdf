@@ -13,11 +13,12 @@ public class OrderProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void enviarPedido() {
+    public String generatePdf(String message) {
         rabbitTemplate.convertAndSend(
                 RabbitConfig.EXCHANGE,
                 RabbitConfig.ROUTING_KEY,
-                "teste producer"
+                message
         );
+        return message;
     }
 }

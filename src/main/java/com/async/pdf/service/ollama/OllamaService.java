@@ -14,15 +14,15 @@ public class OllamaService {
         this.chatClient = builder.build();
     }
 
-    public String conversar(String pergunta) {
+    public String prompt(String question) {
         return chatClient
                 .prompt()
-                .user(pergunta)
+                .user(question)
                 .call()
                 .content();
     }
 
     public String chat(String question) {
-        return conversar(question);
+        return prompt(question);
     }
 }

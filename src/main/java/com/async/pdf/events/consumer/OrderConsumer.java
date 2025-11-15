@@ -26,13 +26,12 @@ public class OrderConsumer {
      * and returns the same response as the method result.
      */
     @RabbitListener(queues = RabbitConfig.QUEUE)
-    public String processOrder(String message) throws IOException {
+    public void processOrder(String message) throws IOException {
         String response = ollamaService.chat(message + "em ptbr");
 
         String path = "C:\\Users\\josem\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
         new File(path).getParentFile().mkdirs();
 
         pdfService.createPdf(response, path);
-        return response;
     }
 }
