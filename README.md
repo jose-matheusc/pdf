@@ -55,7 +55,6 @@ Send the report text via API, using simple Markdown to highlight headings, lists
 - Java 17+
 - Spring Boot
 - RabbitMQ
-- JWT (JSON Web Token)
 - Ollama
 - Maven
 
