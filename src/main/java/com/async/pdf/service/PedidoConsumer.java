@@ -25,20 +25,12 @@ public class PedidoConsumer {
      */
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public String processOrder(String message) throws IOException {
-        String response = ollamaService.chat(message);
+        String response = ollamaService.chat(message + "em ptbr");
 
-        String path = "C:\\Users\\Maria Angela\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
+        String path = "C:\\Users\\josem\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
         new File(path).getParentFile().mkdirs();
 
         pdfService.createPdf(response, path);
         return response;
-    }
-
-    /**
-     * Backward-compatible alias in PT-BR. Prefer using {@link #processOrder(String)}.
-     */
-    @Deprecated
-    public String processarPedido(String mensagem) throws IOException {
-        return processOrder(mensagem);
     }
 }
