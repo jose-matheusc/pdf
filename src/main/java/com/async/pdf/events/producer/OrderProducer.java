@@ -1,15 +1,15 @@
-package com.async.pdf.service;
+package com.async.pdf.events.producer;
 
 import com.async.pdf.config.RabbitConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PedidoProducer {
+public class OrderProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public PedidoProducer(RabbitTemplate rabbitTemplate) {
+    public OrderProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
@@ -19,6 +19,5 @@ public class PedidoProducer {
                 RabbitConfig.ROUTING_KEY,
                 "teste producer"
         );
-        System.out.println("📤 Pedido enviado: " );
     }
 }

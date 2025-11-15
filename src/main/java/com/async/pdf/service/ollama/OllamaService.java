@@ -1,4 +1,4 @@
-package com.async.pdf.service;
+package com.async.pdf.service.ollama;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;

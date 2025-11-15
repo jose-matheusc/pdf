@@ -62,7 +62,7 @@ public class JwtService {
     /**
      * Returns roles from the token
      */
-    public List<String> extractRoles(String token) {
+    public List extractRoles(String token) {
         Claims claims = parseClaims(token);
         return claims.get("roles", List.class);
     }

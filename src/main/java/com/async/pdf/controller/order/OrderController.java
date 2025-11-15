@@ -1,6 +1,6 @@
-package com.async.pdf.controller;
+package com.async.pdf.controller.order;
 
-import com.async.pdf.service.PedidoProducer;
+import com.async.pdf.events.producer.OrderProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private final PedidoProducer pedidoProducer;
+    private final OrderProducer orderProducer;
 
-    public OrderController(PedidoProducer pedidoProducer) {
-        this.pedidoProducer = pedidoProducer;
+    public OrderController(OrderProducer orderProducer) {
+        this.orderProducer = orderProducer;
     }
 
     @PostMapping("/public/send")
     public ResponseEntity<String> sendOrder() {
-        pedidoProducer.enviarPedido();
+        orderProducer.enviarPedido();
         return ResponseEntity.ok("Order sent successfully!");
     }
 }

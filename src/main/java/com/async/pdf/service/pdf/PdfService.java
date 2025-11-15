@@ -1,4 +1,4 @@
-package com.async.pdf.service;
+package com.async.pdf.service.pdf;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;

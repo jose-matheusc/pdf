@@ -1,6 +1,8 @@
-package com.async.pdf.service;
+package com.async.pdf.events.consumer;
 
 import com.async.pdf.config.RabbitConfig;
+import com.async.pdf.service.ollama.OllamaService;
+import com.async.pdf.service.pdf.PdfService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 @Service
-public class PedidoConsumer {
+public class OrderConsumer {
 
     private final PdfService pdfService;
     private final OllamaService ollamaService;
 
-    public PedidoConsumer(PdfService pdfService, OllamaService ollamaService) {
+    public OrderConsumer(PdfService pdfService, OllamaService ollamaService) {
         this.ollamaService = ollamaService;
         this.pdfService = pdfService;
     }
