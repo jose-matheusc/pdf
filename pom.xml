@@ -23,6 +23,7 @@
 		<spring-ai.version>1.0.0-M1</spring-ai.version>
 	</properties>
 
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
