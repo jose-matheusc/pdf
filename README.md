@@ -95,5 +95,20 @@ Send the report text via API, using simple Markdown to highlight headings, lists
 ## Configuration
 Settings are in `src/main/resources/application.yml` and `application-local.yml`.
 
+### PDF Storage Path
+To ensure PDFs are saved correctly, add the following to your configuration file (e.g., `application.yml`):
+
+**Windows example:**
+```yaml
+storage:
+  path: 'C:\Users\{your-username}\Documents\generate\pdf-async'
+```
+**Linux/macOS example:**
+```yaml
+storage:
+  path: '/home/{your-username}/Documents/generate/pdf-async'
+```
+Replace `{your-username}` with your actual username for your operating system. The generated PDFs will be stored in this folder.
+
 ## Contact
 Questions or support: josematheus.profissional@gmail.com

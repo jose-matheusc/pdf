@@ -12,5 +12,8 @@ spring:
     username: {DB_USER_RABBITMQ}
     password: {DB_PASS_RABBITMQ}
 jwt:
-  secret: {JWT_SECRET}
-  expiration-ms: {JWT_EXPIRATION_MS}
+  secret: c2f9e8b7c1d3f5a9e6b4c8d2f3a9b1c7d5e6f9a0b1c2d3e4f5a6b7c8d9e0f1
+  expirationMs: 3600000
+pdf:
+  storage:
+    path: 'C:\Users\{...}\Documents\generate\pdf-async'

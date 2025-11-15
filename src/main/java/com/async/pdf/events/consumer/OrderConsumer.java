@@ -4,6 +4,7 @@ import com.async.pdf.config.RabbitConfig;
 import com.async.pdf.service.ollama.OllamaService;
 import com.async.pdf.service.pdf.PdfService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -14,6 +15,9 @@ public class OrderConsumer {
 
     private final PdfService pdfService;
     private final OllamaService ollamaService;
+
+    @Value("${pdf.storage.path}")
+    private String pdfStoragePath;
 
     public OrderConsumer(PdfService pdfService, OllamaService ollamaService) {
         this.ollamaService = ollamaService;
@@ -27,9 +31,9 @@ public class OrderConsumer {
      */
     @RabbitListener(queues = RabbitConfig.QUEUE)
     public void processOrder(String message) throws IOException {
-        String response = ollamaService.chat(message + "em ptbr");
+        String response = ollamaService.chat(message + "em ptbr e com imagem png");
 
-        String path = "C:\\Users\\josem\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
+        String path = pdfStoragePath + System.currentTimeMillis() + ".pdf";
         new File(path).getParentFile().mkdirs();
 
         pdfService.createPdf(response, path);
