@@ -96,11 +96,5 @@ Send the report text via API, using simple Markdown to highlight headings, lists
 ## Configuration
 Settings are in `src/main/resources/application.yml` and `application-local.yml`.
 
-## Tests
-Run tests with:
-```
-mvn test
-```
-
 ## Contact
 Questions or support: josematheus.profissional@gmail.com
