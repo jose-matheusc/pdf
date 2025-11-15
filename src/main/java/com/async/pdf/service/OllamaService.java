@@ -21,4 +21,8 @@ public class OllamaService {
                 .call()
                 .content();
     }
+
+    public String chat(String question) {
+        return conversar(question);
+    }
 }

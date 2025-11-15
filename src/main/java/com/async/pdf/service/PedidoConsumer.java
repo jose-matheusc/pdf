@@ -1,31 +1,44 @@
 package com.async.pdf.service;
 
 import com.async.pdf.config.RabbitConfig;
-import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+
 @Service
 public class PedidoConsumer {
 
     private final PdfService pdfService;
+    private final OllamaService ollamaService;
 
-    public PedidoConsumer(PdfService pdfService){
+    public PedidoConsumer(PdfService pdfService, OllamaService ollamaService) {
+        this.ollamaService = ollamaService;
         this.pdfService = pdfService;
     }
 
+    /**
+     * Main processing method for orders coming from RabbitMQ.
+     * Uses the chat service, generates a styled PDF containing the AI response,
+     * and returns the same response as the method result.
+     */
     @RabbitListener(queues = RabbitConfig.QUEUE)
-    public void processarPedido(String mensagem) throws IOException {
-        System.out.println("Mensagem recebida: " + mensagem);
+    public String processOrder(String message) throws IOException {
+        String response = ollamaService.chat(message);
 
-        String caminho = "C:\\Users\\Maria Angela\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
-        new File(caminho).getParentFile().mkdirs();
+        String path = "C:\\Users\\Maria Angela\\Documents\\aa\\pedido_" + System.currentTimeMillis() + ".pdf";
+        new File(path).getParentFile().mkdirs();
 
-        pdfService.criarPdf(caminho);
-        System.out.println("PDF criado em: " + caminho);
+        pdfService.createPdf(response, path);
+        return response;
+    }
+
+    /**
+     * Backward-compatible alias in PT-BR. Prefer using {@link #processOrder(String)}.
+     */
+    @Deprecated
+    public String processarPedido(String mensagem) throws IOException {
+        return processOrder(mensagem);
     }
 }
-
-
